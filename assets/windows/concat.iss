@@ -32,23 +32,23 @@
 [Setup]
 ; One id for the life of the product, so an install over an older one is
 ; an upgrade and not a second copy.
-AppId={{7B1E5C3A-3B9E-4F0B-9C6D-2F1D0C0A0C47}
-AppName=Concat
+AppId={{A4E8C1D2-6F3B-4A91-8E57-1C0B9D2E4F10}
+AppName=Sval
 AppVersion={#Version}
-AppVerName=Concat {#Version}
-AppPublisher=Concat contributors
+AppVerName=Sval {#Version}
+AppPublisher=Sval
 AppPublisherURL=https://github.com/jub0t/Concat
 AppSupportURL=https://github.com/jub0t/Concat/issues
 AppUpdatesURL=https://github.com/jub0t/Concat/releases
-DefaultDirName={autopf}\Concat
-DefaultGroupName=Concat
+DefaultDirName={autopf}\Sval
+DefaultGroupName=Sval
 DisableProgramGroupPage=yes
 LicenseFile=..\..\LICENSE
 OutputDir={#Out}
-OutputBaseFilename=Concat-{#Version}-windows-{#Suffix}-setup
-SetupIconFile=..\icons\concat.ico
-UninstallDisplayIcon={app}\concat.ico
-UninstallDisplayName=Concat
+OutputBaseFilename=Sval-{#Version}-windows-{#Suffix}-setup
+SetupIconFile=..\icons\sval.ico
+UninstallDisplayIcon={app}\sval.ico
+UninstallDisplayName=Sval
 Compression=lzma2/max
 SolidCompression=yes
 WizardStyle=modern
@@ -105,14 +105,14 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 
 [Files]
 Source: "{#Stage}\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "..\icons\concat.ico"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\icons\sval.ico"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
-Name: "{autoprograms}\Concat"; Filename: "{app}\concat.exe"; IconFilename: "{app}\concat.ico"
+Name: "{autoprograms}\Sval"; Filename: "{app}\concat.exe"; IconFilename: "{app}\sval.ico"
 ; The way in when a graphics driver draws the window as coloured squares:
 ; it turns off Settings > General > Draw on the GPU, which that window hides.
-Name: "{autoprograms}\Concat (safe graphics)"; Filename: "{app}\concat.exe"; Parameters: "--software"; IconFilename: "{app}\concat.ico"
-Name: "{autodesktop}\Concat"; Filename: "{app}\concat.exe"; IconFilename: "{app}\concat.ico"; Tasks: desktopicon
+Name: "{autoprograms}\Sval (safe graphics)"; Filename: "{app}\concat.exe"; Parameters: "--software"; IconFilename: "{app}\sval.ico"
+Name: "{autodesktop}\Sval"; Filename: "{app}\concat.exe"; IconFilename: "{app}\sval.ico"; Tasks: desktopicon
 
 [Run]
-Filename: "{app}\concat.exe"; Description: "{cm:LaunchProgram,Concat}"; Flags: nowait postinstall skipifsilent
+Filename: "{app}\concat.exe"; Description: "{cm:LaunchProgram,Sval}"; Flags: nowait postinstall skipifsilent

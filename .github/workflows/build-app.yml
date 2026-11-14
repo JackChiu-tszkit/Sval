@@ -526,7 +526,7 @@ jobs:
           VERSION: ${{ steps.version.outputs.version }}
         run: |
           set -euo pipefail
-          app=Concat.app
+          app=Sval.app
           rm -rf "$app"
           mkdir -p "$app/Contents/MacOS" "$app/Contents/Resources" "$app/Contents/Frameworks"
           cp "src/target/${{ matrix.target }}/app/concat" "$app/Contents/MacOS/concat"
@@ -535,36 +535,36 @@ jobs:
           iconset=Concat.iconset
           rm -rf "$iconset"; mkdir "$iconset"
           icons=assets/icons
-          cp "$icons/concat_logo_16.png"  "$iconset/icon_16x16.png"
-          cp "$icons/concat_logo_32.png"  "$iconset/icon_16x16@2x.png"
-          cp "$icons/concat_logo_32.png"  "$iconset/icon_32x32.png"
-          cp "$icons/concat_logo_64.png"  "$iconset/icon_32x32@2x.png"
-          cp "$icons/concat_logo_128.png" "$iconset/icon_128x128.png"
-          cp "$icons/concat_logo_256.png" "$iconset/icon_128x128@2x.png"
-          cp "$icons/concat_logo_256.png" "$iconset/icon_256x256.png"
-          cp "$icons/concat_logo_512.png" "$iconset/icon_256x256@2x.png"
-          cp "$icons/concat_logo_512.png" "$iconset/icon_512x512.png"
-          iconutil -c icns "$iconset" -o "$app/Contents/Resources/Concat.icns"
+          cp "$icons/sval_logo_16.png"  "$iconset/icon_16x16.png"
+          cp "$icons/sval_logo_32.png"  "$iconset/icon_16x16@2x.png"
+          cp "$icons/sval_logo_32.png"  "$iconset/icon_32x32.png"
+          cp "$icons/sval_logo_64.png"  "$iconset/icon_32x32@2x.png"
+          cp "$icons/sval_logo_128.png" "$iconset/icon_128x128.png"
+          cp "$icons/sval_logo_256.png" "$iconset/icon_128x128@2x.png"
+          cp "$icons/sval_logo_256.png" "$iconset/icon_256x256.png"
+          cp "$icons/sval_logo_512.png" "$iconset/icon_256x256@2x.png"
+          cp "$icons/sval_logo_512.png" "$iconset/icon_512x512.png"
+          iconutil -c icns "$iconset" -o "$app/Contents/Resources/Sval.icns"
 
           cat > "$app/Contents/Info.plist" <<PLIST
           <?xml version="1.0" encoding="UTF-8"?>
           <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
           <plist version="1.0">
           <dict>
-            <key>CFBundleName</key><string>Concat</string>
-            <key>CFBundleDisplayName</key><string>Concat</string>
-            <key>CFBundleIdentifier</key><string>app.concat.editor</string>
+            <key>CFBundleName</key><string>Sval</string>
+            <key>CFBundleDisplayName</key><string>Sval</string>
+            <key>CFBundleIdentifier</key><string>app.sval.editor</string>
             <key>CFBundleVersion</key><string>${VERSION}</string>
             <key>CFBundleShortVersionString</key><string>${VERSION}</string>
             <key>CFBundleExecutable</key><string>concat</string>
-            <key>CFBundleIconFile</key><string>Concat</string>
+            <key>CFBundleIconFile</key><string>Sval</string>
             <key>CFBundlePackageType</key><string>APPL</string>
             <key>LSMinimumSystemVersion</key><string>${MACOSX_DEPLOYMENT_TARGET}</string>
             <key>NSHighResolutionCapable</key><true/>
             <key>NSSupportsAutomaticGraphicsSwitching</key><true/>
             <key>LSApplicationCategoryType</key><string>public.app-category.video</string>
             <key>NSHumanReadableCopyright</key><string>AGPL-3.0-or-later. See THIRD_PARTY_NOTICES.md.</string>
-            <key>NSMicrophoneUsageDescription</key><string>Concat records voiceovers from your microphone.</string>
+            <key>NSMicrophoneUsageDescription</key><string>Sval records voiceovers from your microphone.</string>
           </dict>
           </plist>
           PLIST
@@ -622,8 +622,8 @@ jobs:
           VERSION: ${{ steps.version.outputs.version }}
         run: |
           set -euo pipefail
-          app=Concat.app
-          dmg="Concat-${VERSION}-macos-${{ matrix.arch }}.dmg"
+          app=Sval.app
+          dmg="Sval-${VERSION}-macos-${{ matrix.arch }}.dmg"
           if [ -n "${CERT_P12}" ] && [ -n "${IDENTITY}" ]; then
             keychain=$RUNNER_TEMP/signing.keychain-db
             echo "$CERT_P12" | base64 --decode > "$RUNNER_TEMP/cert.p12"
@@ -652,7 +652,7 @@ jobs:
             codesign --force --deep -s - "$app"
           fi
 
-          hdiutil create -volname Concat -srcfolder "$app" -ov -format UDZO "$dmg"
+          hdiutil create -volname Sval -srcfolder "$app" -ov -format UDZO "$dmg"
 
           if [ -n "${APPLE_ID}" ] && [ -n "${TEAM_ID}" ] && [ -n "${APP_PASSWORD}" ] && [ -n "${IDENTITY}" ]; then
             codesign --force --timestamp -s "$IDENTITY" "$dmg"
@@ -668,7 +668,7 @@ jobs:
       - name: Smoke test (macOS)
         if: matrix.platform == 'macos'
         timeout-minutes: 10
-        run: scripts/ci/smoke-macos.sh Concat.app
+        run: scripts/ci/smoke-macos.sh Sval.app
 
       # ── Package: Linux ─────────────────────────────────────────────────
       # The binary, the FFmpeg runtime libraries it loads from lib/ beside
@@ -702,17 +702,17 @@ jobs:
                 || { echo "libggml-cpu-$module.so is missing from the build" >&2; exit 1; }
             done
           fi
-          cp assets/icons/concat_logo_256.png "stage/$name/concat.png"
+          cp assets/icons/sval_logo_256.png "stage/$name/concat.png"
           cat > "stage/$name/concat.desktop" <<DESKTOP
           [Desktop Entry]
           Type=Application
-          Name=Concat
+          Name=Sval
           Comment=Video editor
           Exec=concat
           Icon=concat
           Categories=AudioVideo;Video;
           Terminal=false
-          StartupWMClass=concat
+          StartupWMClass=sval
           DESKTOP
           cp LICENSE THIRD_PARTY_NOTICES.md "stage/$name/"
           # The binary must resolve every library from the folder alone.

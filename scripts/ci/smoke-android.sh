@@ -314,8 +314,8 @@ grep -i 'ResumedActivity' "$out/focus.txt" | grep -q "$package/" \
   || fail "the app's activity is not the one in front after ${wait_secs}s"
 # The app's own first line, from android_main: proof its native code ran,
 # and not only that a process by its name exists.
-grep -E -q ' concat +: ([A-Za-z0-9_:]+: )?Concat .* starting' "$logcat_file" \
-  || fail "the app's first line (\"Concat <version> starting\") never reached logcat"
+grep -E -q ' concat +: ([A-Za-z0-9_:]+: )?Sval .* starting' "$logcat_file" \
+  || fail "the app's first line (\"Sval <version> starting\") never reached logcat"
 if [ -n "$ready" ] && [ -z "$seen_ready" ]; then
   fail "no line matching '$ready' within ${wait_secs}s"
 fi

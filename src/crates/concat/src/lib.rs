@@ -402,7 +402,7 @@ fn start(project: Option<std::path::PathBuf>, smoke: bool) -> Result<(), slint::
     }
     studio.reload_packages(false);
     studio.watch_packages();
-    let dark = studio.prefs.dark.unwrap_or(true);
+    let dark = studio.prefs.dark.unwrap_or(false);
     app.global::<Theme>().set_dark(dark);
     motion_tiles::install(&app);
     // Windows puts a dialog's OK before its Cancel; macOS and Linux after.
@@ -430,7 +430,7 @@ fn start(project: Option<std::path::PathBuf>, smoke: bool) -> Result<(), slint::
     }
     // The playhead is remembered the accent's way: an accent's name, worn
     // as each palette has it, or a picked colour's hex. None remembered,
-    // or a name no longer on the list, is Lime, the palette's own.
+    // or a name no longer on the list, is Sea, the palette's own.
     {
         let theme = app.global::<Theme>();
         let names = theme.get_accent_names();
@@ -2139,7 +2139,7 @@ fn start(project: Option<std::path::PathBuf>, smoke: bool) -> Result<(), slint::
     });
     // The playhead's colour is the same shape of thing as the accent: one
     // int on the Theme global, remembered as the accent's name it points
-    // at, or as the hex of a colour picked by hand. Lime is the palette's
+    // at, or as the hex of a colour picked by hand. Sea is the palette's
     // own, and the file then names none.
     app.on_settings_playhead_chosen({
         move |index| {

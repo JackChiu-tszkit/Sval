@@ -46,7 +46,7 @@ export global Theme {
     /// picks it (main.rs, `on_settings_theme_changed`), and every binding in
     /// the tree is a property read away from it, so the window retones in a
     /// frame without anything being rebuilt.
-    in-out property <bool> dark: true;
+    in-out property <bool> dark: false;
     /// Whether a dialog's go-ahead button comes before its Cancel, as on
     /// Windows, rather than after it, as on macOS and the Linux desktops
     /// (#681). Set once at start-up from the platform (lib.rs); read by
@@ -57,7 +57,7 @@ export global Theme {
     /// Settings > Appearance picks it (lib.rs, `on_settings_accent_changed`)
     /// the way it picks `dark`, and it retones the window the same way.
     /// Remembered by name rather than by number, so a list that grows or
-    /// reorders keeps everyone's choice; 0 is Lime, the default. One past
+    /// reorders keeps everyone's choice; 0 is Sea, the default. One past
     /// the last name is the custom colour, `accent-custom`.
     in-out property <int> accent-choice: 0;
     /// A colour picked by hand in place of any on the list. Read only while
@@ -74,7 +74,7 @@ export global Theme {
     /// name is the English word Settings shows for it, and the id it is
     /// remembered under in settings.json, lower-cased; the dialog holds the
     /// same list wrapped for translation, in this order.
-    out property <[string]> accent-names: ["Lime", "Sky", "Violet", "Rose", "Amber", "Mint"];
+    out property <[string]> accent-names: ["Sea", "Sky", "Violet", "Rose", "Amber", "Mint"];
     /// The playhead's colour when one was picked by hand in Settings >
     /// Appearance, in place of the palette's own. Read only while
     /// `playhead-is-custom`, and one colour under both palettes, for the
@@ -82,7 +82,7 @@ export global Theme {
     /// Grey until picked, so the dot that offers it reads as a blank.
     in-out property <color> playhead-custom: #808080;
     /// Which colour the playhead wears: an index into `accent-names`, each
-    /// worn as the palette that is on has it - the first, Lime, is the
+    /// worn as the palette that is on has it - the first, Sea, is the
     /// palette's own playhead - or one past them for `playhead-custom`.
     /// Settings > Appearance sets it (lib.rs, `on_settings_playhead_chosen`).
     in-out property <int> playhead-choice: 0;
@@ -145,12 +145,12 @@ export global Theme {
     //
     // radii
     out property <length> r-xs: 3px;
-    out property <length> r-sm: 5px;
-    out property <length> r: 7px;
-    out property <length> r-lg: 12px;
+    out property <length> r-sm: 4px;
+    out property <length> r: 6px;
+    out property <length> r-lg: 10px;
     /// The dialog sheet, and nothing smaller. A modal is the largest rounded
     /// thing in the window and wants a corner to match.
-    out property <length> r-xl: 16px;
+    out property <length> r-xl: 14px;
 
     // metrics
     out property <length> h: 28px;        // standard control height

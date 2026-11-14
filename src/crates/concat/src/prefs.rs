@@ -39,20 +39,20 @@ pub struct SavedLayout {
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(default, rename_all = "camelCase")]
 pub struct Preferences {
-    /// The dark theme. `None` is the app's default, which is dark.
+    /// The dark theme. `None` is the app's default, which is light.
     pub dark: Option<bool>,
     /// The parent folder of the last project created successfully.
     pub last_project_location: Option<String>,
     /// The accent, by the lower-cased name the theme lists it under —
-    /// "lime", "sky", ... — or as "#rrggbb" for a colour picked by hand.
+    /// "sea", "sky", ... — or as "#rrggbb" for a colour picked by hand.
     /// `None`, or a name no longer on the list, is the first one, which is
-    /// Lime.
+    /// Sea.
     pub accent: Option<String>,
     /// The playhead's colour the accent's way: the lower-cased name of one
     /// of the accents - "sky", ... - worn as each palette has it, or
     /// "#rrggbb" for a colour picked by hand in Settings > Appearance.
     /// `None`, or a name no longer on the list, is the palette's own, which
-    /// is Lime.
+    /// is Sea.
     pub playhead: Option<String>,
     /// The interface scale, as a percent from [`UI_SCALES`]: the window and
     /// everything in it are drawn this much larger than the display's own

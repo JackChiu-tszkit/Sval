@@ -716,7 +716,7 @@ export component SettingsDialog inherits Sheet {
     /// that only ever reached `I18n.t` through a variable would never be
     /// offered to a translator.
     property <[string]> accent-labels: [
-        I18n.t("settings.lime"), I18n.t("settings.sky"),
+        I18n.t("settings.sea"), I18n.t("settings.sky"),
         I18n.t("settings.violet"), I18n.t("settings.rose"), I18n.t("settings.amber"),
         I18n.t("settings.mint"),
     ];
@@ -1347,7 +1347,7 @@ export component SettingsDialog inherits Sheet {
                     ruled: false;
                     first: true;
                     title: I18n.t("settings.scriptsAndApps");
-                    hint: I18n.t("settings.servesConcatApiWhile");
+                    hint: I18n.t("settings.servesSvalApiWhile");
                     switchable: true;
                     on: root.data.server-enabled;
                     switched(on) => { root.server-enabled-changed(on); }
@@ -1658,6 +1658,13 @@ export component SettingsDialog inherits Sheet {
                         color: Theme.fg;
                         font-size: Theme.fs-lg;
                         font-weight: Theme.weight-title;
+                    }
+
+                    Text {
+                        text: I18n.t("settings.lineage");
+                        color: Theme.fg-muted;
+                        font-size: Theme.fs-sm;
+                        wrap: word-wrap;
                     }
                 }
 
